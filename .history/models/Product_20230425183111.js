@@ -1,0 +1,4 @@
+
+const ModelSchema = new Schema({
+
+})
