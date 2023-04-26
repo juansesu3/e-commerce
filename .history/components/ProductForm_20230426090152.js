@@ -22,13 +22,12 @@ export default function ProductForm({
         if(_id){
             //update           
             await axios.put('/api/products', {...data,_id});
-           
+            setGoToProducts(true);
         }else{
             //create           
             await axios.post('/api/products', data);
-          
-        } 
-        setGoToProducts(true);            
+            setGoToProducts(true);
+        }             
     }
 
     if (goToProducts) {

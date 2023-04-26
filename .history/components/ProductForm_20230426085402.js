@@ -18,17 +18,17 @@ export default function ProductForm({
 
     const saveProduct = async (ev) => {
         ev.preventDefault();
-        const data = { title, description, price };
         if(_id){
-            //update           
-            await axios.put('/api/products', {...data,_id});
-           
+            //update
+            await axios.put
         }else{
-            //create           
+            //create
+            const data = { title, description, price };
             await axios.post('/api/products', data);
-          
-        } 
-        setGoToProducts(true);            
+            setGoToProducts(true);
+        }
+       
+        
     }
 
     if (goToProducts) {

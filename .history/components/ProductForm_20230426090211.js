@@ -28,7 +28,7 @@ export default function ProductForm({
             await axios.post('/api/products', data);
           
         } 
-        setGoToProducts(true);            
+                    
     }
 
     if (goToProducts) {
