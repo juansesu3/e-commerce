@@ -41,10 +41,6 @@ try {
 
     
 } catch (error) {
-    if (e.name === "AbortError") {
-        uploadProgress.textContent = 'Upload aborted: ' + e.message;
-      }
-    console.log(error)
     
 }
      

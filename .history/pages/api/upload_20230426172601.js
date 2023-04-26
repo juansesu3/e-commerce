@@ -1,7 +1,6 @@
 import multiparty from 'multiparty';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import fs from 'fs';
-import mime from 'mime-types';
+import fs from 'fs'
 
 const bucketName = 'negiupp-next-ecommerce';
 
@@ -21,39 +20,22 @@ export default async function handle(req, res) {
             accessKeyId: process.env.S3_ACCESS_KEY,
             secretAccessKey: process.env.S3_SECRET_ACCES_KEY,
         },
+
     });
-    const links =[];
     for (const file of files.file) {
         const ext = file.originalFilename.split('.').pop();
         const newFilename = Date.now() + '.' + ext;
-        console.log(newFilename)
         console.log({ ext, file })
+        await client.send(new PutObjectCommand({
+            Bucket: bucketName,
+            key: newFilename,
+            Body: fs.readFileSync(file.path), 
+            ACL: 'public-read'
 
-try {
-    await client.send(new PutObjectCommand({
-        Bucket: bucketName,
-        key: newFilename,
-        Body: fs.readFileSync(file.path), 
-        ACL: 'public-read',
-        ContentType: mime.lookup(file.path),
-
-    }));
-
-    
-} catch (error) {
-    if (e.name === "AbortError") {
-        uploadProgress.textContent = 'Upload aborted: ' + e.message;
-      }
-    console.log(error)
-    
-}
-     
-
-        const link = `http://${bucketName}.s3.amazonaws.com/${newFilename}`;
-        links.push(link);
+        }));
     }
 
-    res.json({links});
+    res.json('ok');
 }
 
 export const config = {

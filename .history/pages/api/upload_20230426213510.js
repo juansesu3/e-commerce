@@ -29,25 +29,16 @@ export default async function handle(req, res) {
         console.log(newFilename)
         console.log({ ext, file })
 
-try {
-    await client.send(new PutObjectCommand({
-        Bucket: bucketName,
-        key: newFilename,
-        Body: fs.readFileSync(file.path), 
-        ACL: 'public-read',
-        ContentType: mime.lookup(file.path),
+try
+        await client.send(new PutObjectCommand({
+            Bucket: bucketName,
+            key: newFilename,
+            Body: fs.readFileSync(file.path), 
+            ACL: 'public-read',
+            ContentType: mime.lookup(file.path),
 
-    }));
+        }));
 
-    
-} catch (error) {
-    if (e.name === "AbortError") {
-        uploadProgress.textContent = 'Upload aborted: ' + e.message;
-      }
-    console.log(error)
-    
-}
-     
 
         const link = `http://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link);
