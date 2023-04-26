@@ -49,7 +49,7 @@ try {
 }
      
 
-        const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
+        const link = `http://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link);
     }
 

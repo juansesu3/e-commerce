@@ -44,12 +44,12 @@ try {
     if (e.name === "AbortError") {
         uploadProgress.textContent = 'Upload aborted: ' + e.message;
       }
-    console.log(e)
+    console.log(error)
     
 }
      
 
-        const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
+        const link = `http://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link);
     }
 

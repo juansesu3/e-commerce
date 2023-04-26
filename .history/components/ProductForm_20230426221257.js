@@ -41,7 +41,7 @@ export default function ProductForm({
             for (const file of files) {
                 data.append('file', file)
             }
-            const res = await axios.post('/api/upload',data)
+            const res = axios.post('/api/upload',data)
             console.log(res)
         }
     }
