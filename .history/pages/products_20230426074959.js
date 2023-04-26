@@ -11,6 +11,7 @@ export default function Products() {
         axios.get('/api/products').then(response => {
             console.log(response.data)
             setProducts(response.data);
+
         });
     }, []);
     console.log('Update state', products)

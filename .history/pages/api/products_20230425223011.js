@@ -6,14 +6,13 @@ import mongoose from "mongoose";
 export default async function handle(req, res) {
     const { method } = req;
     await mongooseConnect();
-    
+    console.log()
 
     if (method === 'GET') {
         if (req.query?.id) {
-            res.json(await Product.findOne({_id:req.query.id}));
+            res.json(await Product.findOne())
         } else {
-            res.json(await Product.find());
-           
+            res.json(await Product.find({ _id: req.query.id }));
         }
     }
 
@@ -21,8 +20,11 @@ export default async function handle(req, res) {
         const { title, description, price } = req.body;
         const ProductDoc = await Product.create({
             title, description, price
+
         })
+
         res.json(ProductDoc);
+
     }
 
 }

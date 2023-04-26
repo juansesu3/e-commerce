@@ -11,6 +11,7 @@ export default function Products() {
         axios.get('/api/products').then(response => {
             console.log(response.data)
             setProducts(response.data);
+
         });
     }, []);
     console.log('Update state', products)
@@ -20,6 +21,7 @@ export default function Products() {
             <Link
                 className="bg-blue-900 text-white rounded-md py-1 px-2"
                 href={'/products/new'}>Add new product</Link>
+
             <table className="basic mt-2 ">
                 <thead>
                     <tr>
