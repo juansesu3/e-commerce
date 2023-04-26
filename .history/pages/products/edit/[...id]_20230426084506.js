@@ -24,9 +24,9 @@ export default function EditProductPage() {
         <Layout>
             <h1>Edit Product</h1>
             {productInfo &&(
-                 <ProductForm {...productInfo}/>
+                
             )}
-          
+           <ProductForm {...productInfo}/>
         </Layout>
     )
 

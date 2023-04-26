@@ -23,10 +23,8 @@ export default function EditProductPage() {
     return (
         <Layout>
             <h1>Edit Product</h1>
-            {productInfo &&(
-                 <ProductForm {...productInfo}/>
-            )}
-          
+            {produ}
+           <ProductForm {...productInfo}/>
         </Layout>
     )
 
