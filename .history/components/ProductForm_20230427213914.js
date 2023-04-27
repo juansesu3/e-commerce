@@ -54,11 +54,10 @@ export default function ProductForm({
         }
     }
 
-    const updateImagesOrder = (images)=>{
-       setImages(images)
-
+    const updateImagesOrder = ()=>{
+        console.log(arguments)
     }
-console.log(images)
+
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>
@@ -78,7 +77,7 @@ console.log(images)
                 setList={updateImagesOrder}>
                 {!!images?.length && images.map(link => (
                     <div key={link} className="h-24">
-                        <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg' alt={link} />
+                        <img className="rounded-lg" src={} alt={link} />
                     </div>
                 ))}
                 </ReactSortable>

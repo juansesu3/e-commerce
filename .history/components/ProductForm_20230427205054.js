@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Spinner from "./Spinner";
-import { ReactSortable } from "react-sortablejs";
 
 export default function ProductForm({
     _id,
@@ -50,15 +48,10 @@ export default function ProductForm({
             setImages(oldImages => {
                 return [...oldImages, ...res.data.links]
             });
-            setIsUploading(false);
+            setIsUploading
         }
     }
 
-    const updateImagesOrder = (images)=>{
-       setImages(images)
-
-    }
-console.log(images)
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>
@@ -71,23 +64,12 @@ console.log(images)
             <label>
                 Photos
             </label>
-            <div className="mb-2 flex flex-wrap gap-1">
-                <ReactSortable 
-                list={images} 
-                className="flex flex-wrap gap-1"
-                setList={updateImagesOrder}>
+            <div className="mb-2 flex flex-wrap gap-2">
                 {!!images?.length && images.map(link => (
                     <div key={link} className="h-24">
-                        <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg' alt={link} />
+                        <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg'/*{link}*/ alt={link} />
                     </div>
                 ))}
-                </ReactSortable>
-                {isUploading && (
-                    <div className="h-24 p-1 flex items-center">
-                        <Spinner/>
-
-                    </div>
-                )}
                 <label className=" w-24 h-24 cursor-pointer text-center 
                 flex flex-col items-center justify-center text-sm gap-1
                  text-gray-500 rounded-lg bg-gray-200">

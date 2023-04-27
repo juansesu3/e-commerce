@@ -58,7 +58,7 @@ export default function ProductForm({
        setImages(images)
 
     }
-console.log(images)
+console.log(iamges)
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>

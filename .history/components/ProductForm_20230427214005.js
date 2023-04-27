@@ -54,11 +54,10 @@ export default function ProductForm({
         }
     }
 
-    const updateImagesOrder = (images)=>{
-       setImages(images)
-
+    const updateImagesOrder = ()=>{
+        console.log(arguments)
     }
-console.log(images)
+
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>
