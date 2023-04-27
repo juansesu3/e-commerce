@@ -18,8 +18,8 @@ export default async function handle(req, res) {
     const client = new S3Client({
         region: 'eu-north-1',
         credentials: {
-            accessKeyId: process.env.S3_ACCESS_KEY,
-            secretAccessKey: process.env.S3_SECRET_ACCES_KEY,
+            accessKeyId: 'AKIAYBQUGVYMKH6JRA23',
+            secretAccessKey: '',
         },
     });
     const links =[];
@@ -31,7 +31,7 @@ export default async function handle(req, res) {
 
 try {
     await client.send(new PutObjectCommand({
-        Bucket: bucketName,
+        Bucket: 'ne-gi-uup-next-ecommerce',
         key: newFilename,
         Body: fs.readFileSync(file.path), 
         ACL: 'public-read',

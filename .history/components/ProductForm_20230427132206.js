@@ -34,7 +34,7 @@ export default function ProductForm({
     if (goToProducts) {
         router.push('/products');
     }
-
+/*
     const uploadImages = async (ev) => {
         const files = ev.target.files
         if (files?.length > 0) {
@@ -48,6 +48,12 @@ export default function ProductForm({
             });
         }
     }
+*/
+
+const handleSubmitImages=()=>{
+
+}
+
 
     return (
         <form onSubmit={saveProduct}>
@@ -83,7 +89,7 @@ export default function ProductForm({
                             d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                     </svg>
                     <div>Upload</div>
-                    <input type="file" onChange={uploadImages} className="hidden" />
+                    <input type="file" onChange={handleSubmitImages} className="hidden" />
                 </label>
                 {!images?.length && (
                     <div>No photos in this product</div>

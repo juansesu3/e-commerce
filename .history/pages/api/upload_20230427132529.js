@@ -31,7 +31,7 @@ export default async function handle(req, res) {
 
 try {
     await client.send(new PutObjectCommand({
-        Bucket: bucketName,
+        Bucket: 'ne-gi-uup-next-ecommerce',
         key: newFilename,
         Body: fs.readFileSync(file.path), 
         ACL: 'public-read',

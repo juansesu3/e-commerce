@@ -3,7 +3,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import fs from 'fs';
 import mime from 'mime-types';
 
-const bucketName = 'ne-gi-uup-next-ecommerce';
+const bucketName = 'negiupp-next-ecommerce';
 
 export default async function handle(req, res) {
     const form = new multiparty.Form();
@@ -48,10 +48,12 @@ try {
     
 }
      
-        const link = `https://ne-gi-uup-next-ecommerce.s3.amazonaws.com/${newFilename}`;
+
+        const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link);
-        
+        console.log({links})
     }
+
     res.json({links});
 }
 

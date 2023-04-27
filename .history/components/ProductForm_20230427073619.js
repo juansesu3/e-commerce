@@ -64,7 +64,7 @@ export default function ProductForm({
             <div className="mb-2">
                 {!!images?.length && images.map(link =>(
                     <div key={link}>
-                        <img src={link} alt={link}/>
+                        <img src="" alt=""/>{link}
                     </div>
                 ))}
                 <label className="w-24 h-24 cursor-pointer text-center 

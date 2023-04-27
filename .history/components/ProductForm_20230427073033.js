@@ -43,9 +43,9 @@ export default function ProductForm({
                 data.append('file', file)
             }
             const res = await axios.post('/api/upload', data)
-            setImages(oldImages => {
-                return [...oldImages, ...res.data.links]
-            });
+            setImages(oldImages =>{
+                return [..]
+            })
         }
     }
 
@@ -62,11 +62,6 @@ export default function ProductForm({
                 Photos
             </label>
             <div className="mb-2">
-                {!!images?.length && images.map(link =>(
-                    <div key={link}>
-                        <img src={link} alt={link}/>
-                    </div>
-                ))}
                 <label className="w-24 h-24 cursor-pointer text-center 
                 flex flex-col items-center justify-center text-sm gap-1
                  text-gray-500 rounded-lg bg-gray-200">

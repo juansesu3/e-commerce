@@ -34,7 +34,7 @@ export default function ProductForm({
     if (goToProducts) {
         router.push('/products');
     }
-
+/*
     const uploadImages = async (ev) => {
         const files = ev.target.files
         if (files?.length > 0) {
@@ -48,7 +48,7 @@ export default function ProductForm({
             });
         }
     }
-
+*/
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>

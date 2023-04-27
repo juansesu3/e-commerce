@@ -64,7 +64,7 @@ export default function ProductForm({
             <div className="mb-2">
                 {!!images?.length && images.map(link =>(
                     <div key={link}>
-                        <img src={link} alt={link}/>
+                        <img src='https://negiupp-next-ecommerce.s3.eu-north-1.amazonaws.com/2022-06-30.png' alt=""/>
                     </div>
                 ))}
                 <label className="w-24 h-24 cursor-pointer text-center 

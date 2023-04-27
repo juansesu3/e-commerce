@@ -7,12 +7,12 @@ export default function ProductForm({
     title: existinTitle,
     description: esxistingDescription,
     price: existingPrice,
-    images: existingImages, }) {
+    images, }) {
 
     const [title, setTitle] = useState(existinTitle || '');
     const [description, setDescription] = useState(esxistingDescription || '');
     const [price, setPrice] = useState(existingPrice || '');
-    const [images, setImages] = useState(existingImages || '');
+    const [images, setImages] = useState('');
     const [goToProducts, setGoToProducts] = useState(false);
     const router = useRouter();
 
@@ -42,10 +42,8 @@ export default function ProductForm({
             for (const file of files) {
                 data.append('file', file)
             }
-            const res = await axios.post('/api/upload', data)
-            setImages(oldImages => {
-                return [...oldImages, ...res.data.links]
-            });
+            const res = await axios.post('/api/upload',data)
+            console.log(res.data)
         }
     }
 
@@ -62,11 +60,6 @@ export default function ProductForm({
                 Photos
             </label>
             <div className="mb-2">
-                {!!images?.length && images.map(link =>(
-                    <div key={link}>
-                        <img src={link} alt={link}/>
-                    </div>
-                ))}
                 <label className="w-24 h-24 cursor-pointer text-center 
                 flex flex-col items-center justify-center text-sm gap-1
                  text-gray-500 rounded-lg bg-gray-200">

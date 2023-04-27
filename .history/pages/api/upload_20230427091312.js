@@ -3,7 +3,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import fs from 'fs';
 import mime from 'mime-types';
 
-const bucketName = 'ne-gi-uup-next-ecommerce';
+const bucketName = 'negiupp-next-ecommerce';
 
 export default async function handle(req, res) {
     const form = new multiparty.Form();
@@ -31,7 +31,7 @@ export default async function handle(req, res) {
 
 try {
     await client.send(new PutObjectCommand({
-        Bucket: bucketName,
+        Bucket: 'ne-gi-uup-next-ecommerce',
         key: newFilename,
         Body: fs.readFileSync(file.path), 
         ACL: 'public-read',
