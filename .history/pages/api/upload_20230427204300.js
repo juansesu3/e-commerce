@@ -36,13 +36,16 @@ try {
         Body: fs.readFileSync(file.path), 
         ACL: 'public-read',
         ContentType: mime.lookup(file.path),
+
     }));
+
     
 } catch (e) {
     if (e.name === "AbortError") {
         uploadProgress.textContent = 'Upload aborted: ' + e.message;
       }   
-} 
+}
+     
         const link = `https://ne-gi-uup-next-ecommerce.s3.amazonaws.com/${newFilename}`;
         links.push(link);
         

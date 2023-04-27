@@ -36,7 +36,9 @@ try {
         Body: fs.readFileSync(file.path), 
         ACL: 'public-read',
         ContentType: mime.lookup(file.path),
+
     }));
+
     
 } catch (e) {
     if (e.name === "AbortError") {

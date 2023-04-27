@@ -20,7 +20,7 @@ export default function ProductForm({
 
     const saveProduct = async (ev) => {
         ev.preventDefault();
-        const data = { title, description, price, images };
+        const data = { title, description, price };
         if (_id) {
             //update           
             await axios.put('/api/products', { ...data, _id });
@@ -61,13 +61,13 @@ export default function ProductForm({
             <label>
                 Photos
             </label>
-            <div className="mb-2 flex flex-wrap gap-2">
+            <div className="mb-2">
                 {!!images?.length && images.map(link =>(
-                    <div key={link} className="h-24">
-                        <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg'/*{link}*/ alt={link}/>
+                    <div key={link} className="h-">
+                        <img src={link} alt={link}/>
                     </div>
                 ))}
-                <label className=" w-24 h-24 cursor-pointer text-center 
+                <label className="w-24 h-24 cursor-pointer text-center 
                 flex flex-col items-center justify-center text-sm gap-1
                  text-gray-500 rounded-lg bg-gray-200">
                     <svg
