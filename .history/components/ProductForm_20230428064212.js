@@ -19,6 +19,9 @@ export default function ProductForm({
     const [isUploading, setIsUploading] = useState(false);
     const router = useRouter();
 
+
+    
+
     console.log({ _id })
 
     const saveProduct = async (ev) => {
@@ -54,11 +57,11 @@ export default function ProductForm({
         }
     }
 
-    const updateImagesOrder = (images) => {
-        setImages(images)
+    const updateImagesOrder = (images)=>{
+       setImages(images)
 
     }
-    console.log(images)
+console.log(images)
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>
@@ -72,19 +75,19 @@ export default function ProductForm({
                 Photos
             </label>
             <div className="mb-2 flex flex-wrap gap-1">
-                <ReactSortable
-                    list={images}
-                    className="flex flex-wrap gap-1"
-                    setList={updateImagesOrder}>
-                    {!!images?.length && images.map(link => (
-                        <div key={link} className="h-24">
-                            <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg' alt={link} />
-                        </div>
-                    ))}
+                <ReactSortable 
+                list={images} 
+                className="flex flex-wrap gap-1"
+                setList={updateImagesOrder}>
+                {!!images?.length && images.map(link => (
+                    <div key={link} className="h-24">
+                        <img className="rounded-lg" src='https://res.cloudinary.com/dgb0ho24r/image/upload/v1682593402/cld-sample-5.jpg' alt={link} />
+                    </div>
+                ))}
                 </ReactSortable>
                 {isUploading && (
                     <div className="h-24 p-1 flex items-center">
-                        <Spinner />
+                        <Spinner/>
 
                     </div>
                 )}

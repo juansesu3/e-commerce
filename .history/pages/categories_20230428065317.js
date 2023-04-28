@@ -9,8 +9,8 @@ const Categories = () => {
   const [name, setName] = useState('');
 
   const saveCategory = async(ev) => {
-    ev.preventDefault();
-    await axios.post('/api/categories', {name});
+    ev.preventDefault()
+    await axios.post('/api/category', {name});
     setName('');
 
   }

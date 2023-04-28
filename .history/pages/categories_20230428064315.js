@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout"
-import axios from "axios";
 import { useState } from "react"
 
 
@@ -8,10 +7,8 @@ const Categories = () => {
 
   const [name, setName] = useState('');
 
-  const saveCategory = async(ev) => {
-    ev.preventDefault();
-    await axios.post('/api/categories', {name});
-    setName('');
+  const saveCategory = (ev) => {
+    ev.preventDefault()
 
   }
 
@@ -24,7 +21,6 @@ const Categories = () => {
         <input
           type=""
           name=""
-          className="mb-0"
           value={name}
           onChange={ev => setName(ev.target.value)}
           placeholder="New category" />

@@ -1,37 +1,35 @@
 import Layout from "@/components/Layout"
-import axios from "axios";
-import { useState } from "react"
-
+import { useState } from "react";
 
 
 const Categories = () => {
-
   const [name, setName] = useState('');
 
-  const saveCategory = async(ev) => {
-    ev.preventDefault();
-    await axios.post('/api/categories', {name});
-    setName('');
+
+  const saveCategory = () => {
 
   }
 
 
   return (
+
     <Layout>
       <h1>Categories</h1>
       <label >New category name</label>
       <form onSubmit={saveCategory} className="flex gap-1">
         <input
-          type=""
-          name=""
           className="mb-0"
-          value={name}
-          onChange={ev => setName(ev.target.value)}
-          placeholder="New category" />
+          type="text"
+          placeholder={'Category name'}
+          onChange={ev=>{setName(ev.target.name)}}
+          value={names}
+        />
         <button
           type='submit'
           className="btn-primary py-1" >Save</button>
+
       </form>
+
     </Layout>
   )
 }
