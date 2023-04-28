@@ -13,7 +13,7 @@ export default function Products() {
             setProducts(response.data);
         });
     }, []);
-    //console.log('Update state', products)
+    console.log('Update state', products)
 
     return (
         <Layout>
