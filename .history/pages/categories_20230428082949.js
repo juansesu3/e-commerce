@@ -12,12 +12,14 @@ const Categories = () => {
 
   useEffect(() => {
     fetchCategories();
+   
   }, []);
 
-  const fetchCategories = () => {
+  const fetchCategories=()=>{
     axios.get('/api/categories').then(result => {
       setCategories(result.data);
     });
+
   }
 
   const saveCategory = async (ev) => {
@@ -50,10 +52,10 @@ const Categories = () => {
           </tr>
         </thead>
         <tbody>
-          {categories.length > 0 && categories.map(category => (
+          {categories.length > 0 && categories.map(category =>(
             <tr key={category._id}>
               <td>{category.name}</td>
-
+              
             </tr>
           ))}
         </tbody>

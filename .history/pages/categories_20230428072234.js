@@ -1,31 +1,27 @@
 import Layout from "@/components/Layout"
 import axios from "axios";
-import { Result } from "postcss";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 
 
 const Categories = () => {
 
   const [name, setName] = useState('');
-  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    effect
+    return () => {
+      cleanup
+    };
+  }, [input]);
 
-  const fetchCategories = () => {
-    axios.get('/api/categories').then(result => {
-      setCategories(result.data);
-    });
-  }
-
-  const saveCategory = async (ev) => {
+  const saveCategory = async(ev) => {
     ev.preventDefault();
-    await axios.post('/api/categories', { name });
+    await axios.post('/api/categories', {name});
     setName('');
-    fetchCategories();
+
   }
+
 
   return (
     <Layout>
@@ -49,14 +45,6 @@ const Categories = () => {
             <td>Category name</td>
           </tr>
         </thead>
-        <tbody>
-          {categories.length > 0 && categories.map(category => (
-            <tr key={category._id}>
-              <td>{category.name}</td>
-
-            </tr>
-          ))}
-        </tbody>
       </table>
     </Layout>
   )

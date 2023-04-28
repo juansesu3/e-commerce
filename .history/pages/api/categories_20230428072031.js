@@ -6,8 +6,7 @@ const handle = async (req, res) => {
     const { method } = req;
     await mongooseConnect();
 
-    if (method === 'GET') {
-        res.json(await Category.find());
+    if(method === 'GET'){
 
     }
 

@@ -1,14 +1,11 @@
-import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/Category";
 
 
 const handle = async (req, res) => {
     const { method } = req;
-    await mongooseConnect();
 
-    if (method === 'GET') {
-        res.json(await Category.find());
-
+    if(method === 'GET'){
+        
     }
 
     if (method === 'POST') {

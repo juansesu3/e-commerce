@@ -11,20 +11,17 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
     axios.get('/api/categories').then(result => {
       setCategories(result.data);
     });
-  }
+  }, []);
+
+  const fetchCategories
 
   const saveCategory = async (ev) => {
     ev.preventDefault();
     await axios.post('/api/categories', { name });
     setName('');
-    fetchCategories();
   }
 
   return (
@@ -50,10 +47,10 @@ const Categories = () => {
           </tr>
         </thead>
         <tbody>
-          {categories.length > 0 && categories.map(category => (
+          {categories.length > 0 && categories.map(category =>(
             <tr key={category._id}>
               <td>{category.name}</td>
-
+              
             </tr>
           ))}
         </tbody>

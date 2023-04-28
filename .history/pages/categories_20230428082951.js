@@ -12,12 +12,14 @@ const Categories = () => {
 
   useEffect(() => {
     fetchCategories();
+
   }, []);
 
   const fetchCategories = () => {
     axios.get('/api/categories').then(result => {
       setCategories(result.data);
     });
+
   }
 
   const saveCategory = async (ev) => {

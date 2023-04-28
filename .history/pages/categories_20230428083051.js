@@ -12,6 +12,7 @@ const Categories = () => {
 
   useEffect(() => {
     fetchCategories();
+
   }, []);
 
   const fetchCategories = () => {
