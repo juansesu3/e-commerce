@@ -2,9 +2,10 @@ import Layout from "@/components/Layout"
 import axios from "axios";
 import { Result } from "postcss";
 import { useEffect, useState } from "react"
-import { withSwal } from 'react-sweetalert2';
 
-const Categories = ({ swal }) => {
+
+
+const Categories = () => {
   const [editedCtegory, setEditedCtegory] = useState(null);
   const [name, setName] = useState('');
   const [parentCategory, setParentCategory] = useState('');
@@ -30,35 +31,15 @@ const Categories = ({ swal }) => {
     } else {
       await axios.post('/api/categories', data);
     }
+
     setName('');
     fetchCategories();
-  };
+  }
 
   const editCategory = (category) => {
     setEditedCtegory(category);
     setName(category.name);
     setParentCategory(category.parent?._id)
-  };
-
-  const deleCategory = (category) => {
-    swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${category.name}"?`,
-      showCancelButton: true,
-      cancelButtonText: 'Cancel',
-      confirmButtonText: 'Yes, Delete!',
-      confirmButtonColor: '#d55',
-      reverseButtons: true,
-
-    }).then(async result => {
-      // when confirmed and promise resolved...
-      //console.log({result})
-      if (result.isConfirmed) {
-        const { _id } = category;
-        await axios.delete('/api/categories?_id=' + _id);
-        fetchCategories();
-      }
-    });
   }
 
   return (
@@ -108,9 +89,7 @@ const Categories = ({ swal }) => {
                   <button
                     onClick={() => editCategory(category)}
                     className="btn-primary mr-1">Edit</button>
-                  <button
-                    onClick={() => deleCategory(category)}
-                    className="btn-primary">Delete</button>
+                  <button className="btn-primary">Delete</button>
                 </div>
               </td>
             </tr>
@@ -121,12 +100,4 @@ const Categories = ({ swal }) => {
   )
 }
 
-export default withSwal(({ swal }, ref) => (
-  <Categories swal={swal} />
-));
-
-
-
-
-
-//export default Categories
+export default Categories

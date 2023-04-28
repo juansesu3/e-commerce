@@ -29,8 +29,7 @@ const handle = async (req, res) => {
 
     if (method === 'DELETE') {
         const { _id } = req.query;
-        await Category.deleteOne({ _id });
-        res.json('ok')
+        Category.deleteOne({ _id });
     }
 }
 

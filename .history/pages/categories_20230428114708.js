@@ -56,7 +56,6 @@ const Categories = ({ swal }) => {
       if (result.isConfirmed) {
         const { _id } = category;
         await axios.delete('/api/categories?_id=' + _id);
-        fetchCategories();
       }
     });
   }

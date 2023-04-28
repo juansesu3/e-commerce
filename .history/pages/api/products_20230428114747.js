@@ -7,11 +7,13 @@ export default async function handle(req, res) {
     const { method } = req;
     await mongooseConnect();
 
+
     if (method === 'GET') {
         if (req.query?.id) {
             res.json(await Product.findOne({ _id: req.query.id }));
         } else {
             res.json(await Product.find());
+
         }
     }
 
@@ -29,9 +31,9 @@ export default async function handle(req, res) {
         res.json(true);
     }
 
-    if (method === 'DELETE') {
+    if(method === 'DELETE'){
         if (req.query?.id) {
-            await Product.deleteOne({ _id: req.query?.id });
+            await Product.deleteOne({_id:req.query?.id});
             res.json(true)
         }
     }

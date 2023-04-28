@@ -54,9 +54,8 @@ const Categories = ({ swal }) => {
       // when confirmed and promise resolved...
       //console.log({result})
       if (result.isConfirmed) {
-        const { _id } = category;
-        await axios.delete('/api/categories?_id=' + _id);
-        fetchCategories();
+        const {_id} = category
+        await axios.delete('/api/categories?_id='+_id)
       }
     });
   }

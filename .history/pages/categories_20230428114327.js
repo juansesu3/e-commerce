@@ -50,13 +50,12 @@ const Categories = ({ swal }) => {
       confirmButtonColor: '#d55',
       reverseButtons: true,
 
-    }).then(async result => {
+    }).then(result => {
       // when confirmed and promise resolved...
       //console.log({result})
       if (result.isConfirmed) {
-        const { _id } = category;
-        await axios.delete('/api/categories?_id=' + _id);
-        fetchCategories();
+        axios.delete('/api')
+
       }
     });
   }

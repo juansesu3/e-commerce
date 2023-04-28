@@ -40,25 +40,23 @@ const Categories = ({ swal }) => {
     setParentCategory(category.parent?._id)
   };
 
-  const deleCategory = (category) => {
+  const deleCategory = () => {
+
     swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${category.name}"?`,
-      showCancelButton: true,
-      cancelButtonText: 'Cancel',
-      confirmButtonText: 'Yes, Delete!',
-      confirmButtonColor: '#d55',
-      reverseButtons: true,
-
-    }).then(async result => {
-      // when confirmed and promise resolved...
-      //console.log({result})
-      if (result.isConfirmed) {
-        const { _id } = category;
-        await axios.delete('/api/categories?_id=' + _id);
-        fetchCategories();
+      text: `Do you want to delete ${category.}`,
+      didOpen: () => {
+        // run when swal is opened...
+      },
+      didClose: () => {
+        // run when swal is closed...
       }
+    }).then(result => {
+      // when confirmed and promise resolved...
+    }).catch(error => {
+      // when promise rejected...
     });
+
   }
 
   return (
