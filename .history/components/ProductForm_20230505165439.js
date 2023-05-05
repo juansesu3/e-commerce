@@ -19,7 +19,7 @@ export default function ProductForm({
     const [goToProducts, setGoToProducts] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [category, setCategoty] = useState(assignedCategory ||'');
+    const [category, setCategoty] = useState(||'');
     const router = useRouter();
     useEffect(() => {
         axios.get('/api/categories').then(result => {
