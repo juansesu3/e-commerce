@@ -47,7 +47,7 @@ export default function ProductForm({
                 data.append('file', file)
             }
             const res = await axios.post('/api/upload', data)
-            console.log('Data from product form', res.data)
+            console.log('Data from product form',res.data)
             setImages(oldImages => {
                 return [...oldImages, ...res.data.links]
             });

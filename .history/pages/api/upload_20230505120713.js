@@ -1,9 +1,11 @@
+
 import multiparty from 'multiparty';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import fs from 'fs';
 import mime from 'mime-types';
 
 const bucketName = 'juan-sesu-ecommerce';
+
 
 export default async function handle(req, res) {
     const form = new multiparty.Form();
@@ -27,6 +29,7 @@ export default async function handle(req, res) {
         const ext = file.originalFilename.split('.').pop();
         const newFilename = `${Date.now()}.${ext}`;
         console.log({ ext, file })
+
         try {
             await client.send(new PutObjectCommand({
                 Bucket: bucketName,
@@ -35,6 +38,7 @@ export default async function handle(req, res) {
                 ACL: 'public-read',
                 ContentType: mime.lookup(file.path)
             }));
+
         } catch (err) {
             console.log(err)
         }
@@ -43,6 +47,7 @@ export default async function handle(req, res) {
     }
     return res.json({ links });
 }
+
 export const config = {
     api: { bodyParser: false },
 };

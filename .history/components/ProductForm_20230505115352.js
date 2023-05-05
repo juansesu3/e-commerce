@@ -14,7 +14,7 @@ export default function ProductForm({
     const [title, setTitle] = useState(existinTitle || '');
     const [description, setDescription] = useState(esxistingDescription || '');
     const [price, setPrice] = useState(existingPrice || '');
-    const [images, setImages] = useState(existingImages || []);
+    const [images, setImages] = useState([]);
     const [goToProducts, setGoToProducts] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const router = useRouter();
@@ -47,7 +47,7 @@ export default function ProductForm({
                 data.append('file', file)
             }
             const res = await axios.post('/api/upload', data)
-            console.log('Data from product form', res.data)
+            console.log('Data from product form',res.data)
             setImages(oldImages => {
                 return [...oldImages, ...res.data.links]
             });
