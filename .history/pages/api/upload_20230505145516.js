@@ -42,7 +42,7 @@ export default async function handle(req, res) {
         } catch (err) {
             console.log(err)
         }
-        
+        console.log(result);
         const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link)
     }
