@@ -27,21 +27,21 @@ export default async function handle(req, res) {
     for (const file of files.file) {
         const ext = file.originalFilename.split('.').pop();
         const newFilename = `${Date.now()}.${ext}`;
-        //console.log({ ext, file })
+        console.log({ ext, file })
         let buffer = fs.readFileSync(file.path);
-        //console.log(buffer);
-        //console.log(buffer.length);
-        try {
+        console.log(buffer);
+        console.log(buffer.length);
+       /* try {*/
             let result = await client.send(new PutObjectCommand({
                 Bucket: bucketName,
                 Key: newFilename,
-                Body: buffer,
+                body: buffer,
                 ACL: 'public-read',
                 ContentType: mime.lookup(file.path)
             }));
-        } catch (err) {
+        /*} catch (err) {
             console.log(err)
-        }
+        }*/
         console.log(result);
         const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
         links.push(link)

@@ -39,7 +39,7 @@ export default async function handle(req, res) {
                 ACL: 'public-read',
                 ContentType: mime.lookup(file.path)
             }));
-        } catch (err) {
+        /*} catch (err) {
             console.log(err)
         }
         console.log(result);
