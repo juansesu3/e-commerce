@@ -56,7 +56,6 @@ const Categories = ({ swal }) => {
       confirmButtonText: 'Yes, Delete!',
       confirmButtonColor: '#d55',
       reverseButtons: true,
-
     }).then(async result => {
       // when confirmed and promise resolved...
       //console.log({result})
@@ -73,10 +72,29 @@ const Categories = ({ swal }) => {
       return [...prev, { name: '', values: '' }];
     });
   }
-  const handlelPropertyNameChage =(property)=>{
-
+  const handlelPropertyNameChage = (index, property, newName) => {
+    setProperties(prev => {
+      const properties = [...prev];
+      properties[index].name = newName;
+      return properties
+    });
   }
 
+  const handlelPropertyValuesChage = (index, property, newValues) => {
+    setProperties(prev => {
+      const properties = [...prev];
+      properties[index].values = newValues;
+      return properties
+    });
+
+  }
+  const removeProperty = (indexToRemove) => {
+    setProperties(prev => {
+      return [...prev].filter((p, pIndex) => {
+        return pIndex !== indexToRemove;
+      });
+    });
+  }
 
   return (
     <Layout>
@@ -113,28 +131,40 @@ const Categories = ({ swal }) => {
           <button
             onClick={addProperty}
             type="button"
-            className="btn-default text-sm">
+            className="btn-default text-sm mb-2">
             Add New Property
           </button>
 
-          {properties.length > 0 && properties.map(property => (
-            <div className=" flex gap-1">
+          {properties.length > 0 && properties.map((property, index) => (
+            <div className=" flex gap-1 mb-2">
               <input
                 type="text"
+                className="mb-0"
                 placeholder="property name (example)"
-                onChange={(ev)=>handlelPropertyNameChage(property, ev.target.value)}
+                onChange={(ev) => handlelPropertyNameChage(
+                  index,
+                  property,
+                  ev.target.value)}
                 value={property.name} />
               <input
-              type="text"
+                type="text"
+                className="mb-0"
                 placeholder="values, comma separated"
+                onChange={(ev) => handlelPropertyValuesChage(
+                  index,
+                  property,
+                  ev.target.value)}
                 value={property.values} />
+              <button
+                onClick={() => removeProperty(index)}
+                type="button"
+                className="btn-default">Remove
+              </button>
             </div>
           ))}
         </div>
-
         <button
           type='submit'
-         
           className="btn-primary py-1" >Save</button>
       </form>
       <table className="basic mt-4">
