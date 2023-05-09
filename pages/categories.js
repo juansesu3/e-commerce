@@ -23,7 +23,14 @@ const Categories = ({ swal }) => {
 
   const saveCategory = async (ev) => {
     ev.preventDefault();
-    const data = { name, parentCategory }
+    const data = {
+      name,
+      parentCategory,
+      properties: properties.map(p => ({
+        name: p.name,
+        values: p.values.split(',')
+      })),
+    }
     if (editedCtegory) {
       data._id = editedCtegory._id;
       await axios.put('/api/categories', data);
@@ -32,6 +39,8 @@ const Categories = ({ swal }) => {
       await axios.post('/api/categories', data);
     }
     setName('');
+    setParentCategory('');
+    setProperties([]);
     fetchCategories();
     console.log(categories)
   };
@@ -163,37 +172,55 @@ const Categories = ({ swal }) => {
             </div>
           ))}
         </div>
-        <button
-          type='submit'
-          className="btn-primary py-1" >Save</button>
+        <div className="flex gap-1">
+          {editedCtegory && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditedCtegory(null);
+                setName('');
+                setParentCategory('');
+              }
+              }
+              className="btn-default">Cancel
+            </button>
+          )}
+          <button
+            type='submit'
+            className="btn-primary py-1" >Save</button>
+        </div>
+
       </form>
-      <table className="basic mt-4">
-        <thead>
-          <tr>
-            <td>Category name</td>
-            <td>Parent category</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.length > 0 && categories.map(category => (
-            <tr key={category._id}>
-              <td>{category.name}</td>
-              <td>{category?.parent?.name}</td>
-              <td>
-                <div className="flex">
-                  <button
-                    onClick={() => editCategory(category)}
-                    className="btn-primary mr-1">Edit</button>
-                  <button
-                    onClick={() => deleCategory(category)}
-                    className="btn-primary">Delete</button>
-                </div>
-              </td>
+      {!editedCtegory && (
+        <table className="basic mt-4">
+          <thead>
+            <tr>
+              <td>Category name</td>
+              <td>Parent category</td>
+              <td></td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categories.length > 0 && categories.map(category => (
+              <tr key={category._id}>
+                <td>{category.name}</td>
+                <td>{category?.parent?.name}</td>
+                <td>
+                  <div className="flex">
+                    <button
+                      onClick={() => editCategory(category)}
+                      className="btn-primary mr-1">Edit</button>
+                    <button
+                      onClick={() => deleCategory(category)}
+                      className="btn-primary">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
     </Layout>
   )
 }
