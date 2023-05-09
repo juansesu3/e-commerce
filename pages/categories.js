@@ -1,7 +1,7 @@
-import Layout from "@/components/Layout"
+import Layout from "@/components/Layout";
 import axios from "axios";
 import { Result } from "postcss";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { withSwal } from 'react-sweetalert2';
 
 const Categories = ({ swal }) => {
@@ -9,6 +9,7 @@ const Categories = ({ swal }) => {
   const [name, setName] = useState('');
   const [parentCategory, setParentCategory] = useState('');
   const [categories, setCategories] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     fetchCategories();
@@ -32,12 +33,18 @@ const Categories = ({ swal }) => {
     }
     setName('');
     fetchCategories();
+    console.log(categories)
   };
 
   const editCategory = (category) => {
     setEditedCtegory(category);
     setName(category.name);
     setParentCategory(category.parent?._id)
+    if (setParentCategory === null) {
+      setParentCategory('')
+    }
+    console.log(parentCategory)
+
   };
 
   const deleCategory = (category) => {
@@ -61,6 +68,16 @@ const Categories = ({ swal }) => {
     });
   }
 
+  const addProperty = () => {
+    setProperties(prev => {
+      return [...prev, { name: '', values: '' }];
+    });
+  }
+  const handlelPropertyNameChage =(property)=>{
+
+  }
+
+
   return (
     <Layout>
       <h1>Categories</h1>
@@ -69,25 +86,55 @@ const Categories = ({ swal }) => {
           ? `Edit category ${editedCtegory.name}`
           : 'New category name'}
       </label>
-      <form onSubmit={saveCategory} className="flex gap-1">
-        <input
-          type=""
-          name=""
-          className="mb-0"
-          value={name}
-          onChange={ev => setName(ev.target.value)}
-          placeholder="Category name" />
-        <select
-          className="mb-0"
-          onChange={ev => setParentCategory(ev.target.value)}
-          value={parentCategory}>
-          <option value="">No parent catedory</option>
-          {categories.length > 0 && categories.map(category => (
-            <option key={category._id} value={category._id}>{category.name}</option>
+      <form onSubmit={saveCategory} >
+        <div className="flex gap-1">
+          <input
+            type=""
+            name=""
+            className="mb-0"
+            value={name}
+            onChange={ev => setName(ev.target.value)}
+            placeholder="Category name" />
+          <select
+            className="mb-0"
+            onChange={ev => setParentCategory(ev.target.value)}
+            value={parentCategory}>
+            <option value="">No parent catedory</option>
+            {categories.length > 0 && categories.map(category => (
+              <option key={category._id}>{category.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-2">
+
+          <label className="block">
+            Properties
+          </label >
+          <button
+            onClick={addProperty}
+            type="button"
+            className="btn-default text-sm">
+            Add New Property
+          </button>
+
+          {properties.length > 0 && properties.map(property => (
+            <div className=" flex gap-1">
+              <input
+                type="text"
+                placeholder="property name (example)"
+                onChange={(ev)=>handlelPropertyNameChage(property, ev.target.value)}
+                value={property.name} />
+              <input
+              type="text"
+                placeholder="values, comma separated"
+                value={property.values} />
+            </div>
           ))}
-        </select>
+        </div>
+
         <button
           type='submit'
+         
           className="btn-primary py-1" >Save</button>
       </form>
       <table className="basic mt-4">
