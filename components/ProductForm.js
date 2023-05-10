@@ -10,7 +10,8 @@ export default function ProductForm({
     description: esxistingDescription,
     price: existingPrice,
     images: existingImages,
-    category: assignedCategory }) {
+    category: assignedCategory,
+    properties: assignedProperties }) {
 
     const [title, setTitle] = useState(existinTitle || '');
     const [description, setDescription] = useState(esxistingDescription || '');
@@ -19,7 +20,8 @@ export default function ProductForm({
     const [goToProducts, setGoToProducts] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [category, setCategoty] = useState(assignedCategory ||'');
+    const [category, setCategoty] = useState(assignedCategory || '');
+    const [productProperties, setProductProperties] = useState(assignedProperties ||{});
     const router = useRouter();
     useEffect(() => {
         axios.get('/api/categories').then(result => {
@@ -32,7 +34,13 @@ export default function ProductForm({
 
     const saveProduct = async (ev) => {
         ev.preventDefault();
-        const data = { title, description, price, images, category };
+        const data = { 
+            title, 
+            description, 
+            price, 
+            images, 
+            category, 
+            properties: productProperties };
         if (_id) {
             //update           
             await axios.put('/api/products', { ...data, _id });
@@ -66,9 +74,27 @@ export default function ProductForm({
 
     const updateImagesOrder = (images) => {
         setImages(images)
-
     }
-    console.log(images)
+
+    const setProductProp = (propName, value) => {
+        setProductProperties(prev => {
+            const newProductProps = { ...prev };
+            newProductProps[propName] = value;
+            return newProductProps;
+        })
+    }
+
+    const propertiesToFill = [];
+    if (categories.length > 0 && category) {
+        let catInfo = categories.find(({ _id }) => _id === category);
+        propertiesToFill.push(...catInfo.properties);
+        while (catInfo?.parent?._id) {
+            const parentCat = categories.find(({ _id }) => _id === catInfo?.parent?._id);
+            propertiesToFill.push(...parentCat.properties);
+            catInfo = parentCat;
+        }
+    }
+
     return (
         <form onSubmit={saveProduct}>
             <label >Product name</label>
@@ -81,10 +107,25 @@ export default function ProductForm({
             <label >Categories</label>
             <select value={category} onChange={ev => setCategoty(ev.target.value)}>
                 <option value="">Uncategorized</option>
-                {categories.length>0 && categories.map((category)=>(
-                    <option key={category._id} value={category._id}>{category.name }</option>
-                )) }
+                {categories.length > 0 && categories.map((category) => (
+                    <option key={category._id} value={category._id}>{category.name}</option>
+                ))}
             </select>
+            {propertiesToFill.length > 0 && propertiesToFill.map((p) => (
+                <div key={p} className="flex gap-1">
+                    <div>{p.name}</div>
+                    <select
+                        value={productProperties[p.name]}
+                        onChange={(ev) =>
+                            setProductProp(p.name, ev.target.value)
+                        }>
+                        {p.values.map((v) => (
+                            <option key={v} value={v}>{v}</option>
+                        ))}
+                    </select>
+                </div>
+            ))
+            }
             <label>
                 Photos
             </label>
@@ -102,7 +143,6 @@ export default function ProductForm({
                 {isUploading && (
                     <div className="h-24 p-1 flex items-center">
                         <Spinner />
-
                     </div>
                 )}
                 <label className=" w-24 h-24 cursor-pointer text-center 
@@ -123,8 +163,6 @@ export default function ProductForm({
                     <div>Upload</div>
                     <input type="file" onChange={uploadImages} className="hidden" />
                 </label>
-
-
             </div>
             <label >Descripiton</label>
             <textarea
