@@ -30,7 +30,7 @@ const Categories = ({ swal }) => {
         name: p.name,
         values: p.values.split(',')
       })),
-    }
+    };
     if (editedCtegory) {
       data._id = editedCtegory._id;
       await axios.put('/api/categories', data);
@@ -42,18 +42,18 @@ const Categories = ({ swal }) => {
     setParentCategory('');
     setProperties([]);
     fetchCategories();
-    console.log(categories)
+
   };
 
   const editCategory = (category) => {
     setEditedCtegory(category);
     setName(category.name);
-    setParentCategory(category.parent?._id)
-    if (setParentCategory === null) {
-      setParentCategory('')
-    }
-    console.log(parentCategory)
-
+    setParentCategory(category.parent?._id);
+    setProperties(category.properties.map(({name, values}) =>({
+      name,
+      values:values.join(','),
+    }))
+    );
   };
 
   const deleCategory = (category) => {
@@ -128,7 +128,7 @@ const Categories = ({ swal }) => {
             value={parentCategory}>
             <option value="">No parent catedory</option>
             {categories.length > 0 && categories.map(category => (
-              <option key={category._id}>{category.name}</option>
+              <option key={category._id} value={category._id}>{category.name}</option>
             ))}
           </select>
         </div>
@@ -145,7 +145,7 @@ const Categories = ({ swal }) => {
           </button>
 
           {properties.length > 0 && properties.map((property, index) => (
-            <div className=" flex gap-1 mb-2">
+            <div key={index} className=" flex gap-1 mb-2">
               <input
                 type="text"
                 className="mb-0"
@@ -180,8 +180,8 @@ const Categories = ({ swal }) => {
                 setEditedCtegory(null);
                 setName('');
                 setParentCategory('');
-              }
-              }
+                setProperties([]);
+              }}
               className="btn-default">Cancel
             </button>
           )}
