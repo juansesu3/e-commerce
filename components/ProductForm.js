@@ -30,7 +30,7 @@ export default function ProductForm({
 
     }, []);
 
-    console.log({ _id })
+    //console.log({ _id })
 
     const saveProduct = async (ev) => {
         ev.preventDefault();
