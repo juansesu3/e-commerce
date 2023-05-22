@@ -19,6 +19,7 @@ const OrdersPage = () => {
         <thead>
           <tr>
             <th>Date</th>
+            <th>Paid</th>
             <th>Recipient</th>
             <th>Products</th>
           </tr>
@@ -28,6 +29,7 @@ const OrdersPage = () => {
             orders.map((order) => (
               <tr key={order._id}>
                 <td>{(new Date(order.createdAt)).toLocaleString()}</td>
+                <td className={order.paid ? 'text-green-600' : 'text-red-600'}>{order.paid ? 'YES' : 'NO'}</td>
                 <td>
                   {order.name} {order.email}
                   <br />
