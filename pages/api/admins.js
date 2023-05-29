@@ -8,7 +8,12 @@ const handle = async (req, res) => {
 
   if (req.method === "POST") {
     const { email } = req.body;
-    res.json(await Admin.create({ email }));
+    if(await Admin.findOne({email})){
+      res.status(400).json({message:'Admin already exists!'});
+    }else{
+      res.json(await Admin.create({ email }));
+    }
+    
   }
   if (req.method === "DELETE") {
     const { _id } = req.query;

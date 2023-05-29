@@ -9,6 +9,7 @@ const AdminsPage = ({ swal }) => {
   const [email, setEmail] = useState("");
   const [adminEmails, setAdminEmails] = useState([]);
   const [isLoading, setIsloading] = useState(false);
+  
   const addAdmin = (ev) => {
     ev.preventDefault();
     axios.post("/api/admins", { email }).then((res) => {
@@ -19,8 +20,15 @@ const AdminsPage = ({ swal }) => {
       });
       setEmail("");
       loadAmins();
+    }).catch(err=>{
+      swal.fire({
+        title: "Error!",
+        text: err.response.data.message,
+        icon: "error",
+      });
     });
   };
+  
   const deleteAdmin = (_id, email) => {
     swal
       .fire({
