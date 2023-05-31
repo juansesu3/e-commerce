@@ -5,6 +5,7 @@ import NextAuth, { getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 const isAdminEmail = async (email) => {
+ 
   return !!(await Admin.findOne({ email }));
 };
 
@@ -19,6 +20,7 @@ export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     session: async ({ session, token, user }) => {
+      
       if (await isAdminEmail(session?.user?.email)) {
         return session;
       } else {

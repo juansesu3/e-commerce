@@ -19,7 +19,7 @@ const SettingsPage = ({ swal }) => {
     });
     setFeaturedLoading(true);
     axios.get("/api/settings?name=featureProductId").then((res) => {
-      setFeaturedProductId(res.data.value);
+      setFeaturedProductId(res.data?.value);
       setFeaturedLoading(false);
     });
   }, []);

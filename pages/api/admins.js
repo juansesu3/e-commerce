@@ -8,6 +8,7 @@ const handle = async (req, res) => {
 
   if (req.method === "POST") {
     const { email } = req.body;
+    console.log({email})
     if(await Admin.findOne({email})){
       res.status(400).json({message:'Admin already exists!'});
     }else{
