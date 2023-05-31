@@ -9,26 +9,29 @@ const AdminsPage = ({ swal }) => {
   const [email, setEmail] = useState("");
   const [adminEmails, setAdminEmails] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  
+
   const addAdmin = (ev) => {
     ev.preventDefault();
-    axios.post("/api/admins", { email }).then((res) => {
-      console.log(res.data);
-      swal.fire({
-        title: "Admin created",
-        icon: "success",
+    axios
+      .post("/api/admins", { email })
+      .then((res) => {
+        console.log(res.data);
+        swal.fire({
+          title: "Admin created",
+          icon: "success",
+        });
+        setEmail("");
+        loadAmins();
+      })
+      .catch((err) => {
+        swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+        });
       });
-      setEmail("");
-      loadAmins();
-    }).catch(err=>{
-      swal.fire({
-        title: "Error!",
-        text: err.response.data.message,
-        icon: "error",
-      });
-    });
   };
-  
+
   const deleteAdmin = (_id, email) => {
     swal
       .fire({
@@ -57,7 +60,6 @@ const AdminsPage = ({ swal }) => {
     setIsloading(true);
     axios.get("api/admins").then((res) => {
       setAdminEmails(res.data);
-      console.log(adminEmails)
       setIsloading(false);
     });
   };
