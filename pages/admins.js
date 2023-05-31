@@ -57,6 +57,7 @@ const AdminsPage = ({ swal }) => {
     setIsloading(true);
     axios.get("api/admins").then((res) => {
       setAdminEmails(res.data);
+      console.log(adminEmails)
       setIsloading(false);
     });
   };
