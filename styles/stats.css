@@ -1,3 +1,8 @@
+.tiles-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+}
+
+
 .tile {
     @apply bg-white shadow-md p-2 text-blue-900 text-center;
 }

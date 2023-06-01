@@ -50,7 +50,7 @@ const HomeStats = () => {
   return (
     <div className="">
       <h2>Orders</h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="tiles-grid">
         <div className="tile ">
           <h3 className="tile-header">Today</h3>
           <div className="tile-number">{orderToday.length}</div>
@@ -68,7 +68,7 @@ const HomeStats = () => {
         </div>
       </div>
       <h2>Revenue</h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="tiles-grid">
         <div className="tile ">
           <h3 className="tile-header">Today</h3>
           <div className="tile-number">$ {OrdersTotal(orderToday)}</div>
