@@ -72,7 +72,7 @@ const AdminsPage = ({ swal }) => {
       <h1>Admins Page</h1>
       <h2>Add new admin</h2>
       <form onSubmit={addAdmin}>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 sm:flex-nowrap">
           <input
             type="text"
             className="mb-0"
