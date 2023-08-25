@@ -228,16 +228,16 @@ const Categories = ({ swal }) => {
                   <td>{category.name}</td>
                   <td>{category?.parent?.name}</td>
                   <td>
-                    <div className="flex">
+                    <div className="flex flex-col gap-1 md:flex-row">
                       <button
                         onClick={() => editCategory(category)}
-                        className="btn-default mr-1"
+                        className="btn-default w-full mr-1"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleCategory(category)}
-                        className="btn-red"
+                        className="btn-red w-full"
                       >
                         Delete
                       </button>

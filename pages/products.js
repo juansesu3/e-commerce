@@ -43,9 +43,9 @@ export default function Products() {
           {products.map((product) => (
             <tr key={product._id}>
               <td>{product.title} </td>
-              <td>
+              <td className="flex flex-col gap-1 md:flex-row justify-center">
                 <Link
-                  className="btn-default"
+                  className="btn-default w-24"
                   href={"/products/edit/" + product._id}
                 >
                   <svg
@@ -65,7 +65,7 @@ export default function Products() {
                   Edit
                 </Link>
                 <Link
-                  className="btn-red"
+                  className="btn-red w-24"
                   href={"/products/delete/" + product._id}
                 >
                   <svg
